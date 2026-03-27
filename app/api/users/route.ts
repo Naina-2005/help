@@ -1,11 +1,12 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { getAuth } from "@clerk/nextjs/server";
 import { prisma } from "@/lib/prisma";
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
-    const { userId } = getAuth();
-    if (!userId) return NextResponse.json({ error: "Unauthenticated" }, { status: 401 });
+    const { userId } = getAuth(req);
+    if (!userId)
+      return NextResponse.json({ error: "Unauthenticated" }, { status: 401 });
 
     const body = await req.json();
     const { email, name } = body;
@@ -19,6 +20,6 @@ export async function POST(req: Request) {
     return NextResponse.json(user);
   } catch (err) {
     console.error(err);
-    return NextResponse.json({ error: "Internal" }, { status: 500 });
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }

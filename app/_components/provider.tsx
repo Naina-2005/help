@@ -1,16 +1,15 @@
 import React from 'react'
-import Header from './Header';
 
- function Provider({
-    children,
+function Provider({
+  children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
     <div>
-        <Header/>{children}
-      
+      {children}
     </div>
   )
 }
+
 export default Provider

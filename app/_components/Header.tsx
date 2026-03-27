@@ -2,27 +2,27 @@ import React from 'react'
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { SignInButton } from '@clerk/nextjs';
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs';
 
-const menuOptions=[
-    {
-        name:"Home",
-        path:'/'
-    },
-    {
-        name:'Pricing',
-        path:'/pricing'
-    },
-    {
-        name:'Contact Us',
-        path:'/contact-us'
-    }
+const menuOptions = [
+  {
+    name: "Home",
+    path: '/'
+  },
+  {
+    name: 'Pricing',
+    path: '/pricing'
+  },
+  {
+    name: 'Contact Us',
+    path: '/contact-us'
+  }
 ]
 
 function Header() {
   return (
-    <div className="flex justify-between items-center p-4 ">
-      <div className="flex gap-2 items-center ">
+    <div className="flex justify-between items-center p-4">
+      <div className="flex gap-2 items-center">
         <Image src={'/logo.svg'} alt='logo' width={30} height={30} />
         <h2 className='font-bold text-2xl'>TripSphere</h2>
       </div>
@@ -34,12 +34,23 @@ function Header() {
           </Link>
         ))}
       </div>
-      <SignInButton mode="modal">
-      <Button>Get Started</Button></SignInButton>
-    </div>
 
+      <div className='flex gap-4 items-center'>
+        <SignedOut>
+          <SignInButton mode="modal">
+            <Button>Get Started</Button>
+          </SignInButton>
+        </SignedOut>
+        <SignedIn>
+          <Link href="/dashboard">
+            <Button variant="outline">My Trips</Button>
+          </Link>
+          <UserButton />
+        </SignedIn>
+      </div>
+
+    </div>
   )
 }
 
 export default Header
-
