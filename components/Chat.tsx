@@ -38,7 +38,6 @@ export default function Chat({ destination }: Props) {
 
   useEffect(() => {
     fetchMessages()
-    // Poll for new messages every 5 seconds
     const interval = setInterval(fetchMessages, 5000)
     return () => clearInterval(interval)
   }, [destination])
@@ -79,13 +78,11 @@ export default function Chat({ destination }: Props) {
 
   return (
     <div className="border rounded-2xl overflow-hidden flex flex-col h-[500px]">
-      {/* Header */}
       <div className="bg-primary text-white p-4">
         <h2 className="font-bold text-lg">💬 {destination} Travel Community</h2>
         <p className="text-sm opacity-80">Chat with fellow travellers heading to {destination}</p>
       </div>
 
-      {/* Messages */}
       <div className="flex-1 overflow-y-auto p-4 space-y-3">
         {fetching ? (
           <div className="flex justify-center items-center h-full">
@@ -114,7 +111,6 @@ export default function Chat({ destination }: Props) {
         <div ref={bottomRef} />
       </div>
 
-      {/* Input */}
       <div className="border-t p-3 flex gap-2">
         <input
           type="text"

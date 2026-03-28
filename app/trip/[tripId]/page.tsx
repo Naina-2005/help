@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
-import Chat from "@/app/_components/chat";
+import Chat from "@/components/Chat";
 
 export default async function TripPage({ params }: { params: Promise<{ tripId: string }> }) {
   const { tripId } = await params;
@@ -60,7 +60,7 @@ export default async function TripPage({ params }: { params: Promise<{ tripId: s
         <p className="text-muted-foreground text-sm">
           Connect with other travellers heading to {data.destination}. Share tips, ask questions, make friends!
         </p>
-        <Chat destination={data.destination} />
+        <Chat params={Promise.resolve({ tripId })} />
       </div>
     </div>
   );
