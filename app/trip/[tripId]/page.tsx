@@ -60,7 +60,7 @@ export default async function TripPage({ params }: { params: Promise<{ tripId: s
         <p className="text-muted-foreground text-sm">
           Connect with other travellers heading to {data.destination}. Share tips, ask questions, make friends!
         </p>
-        <Chat params={Promise.resolve({ tripId })} />
+        <Chat destination={data.destination} />
       </div>
     </div>
   );
